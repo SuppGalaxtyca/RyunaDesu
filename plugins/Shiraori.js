@@ -6,7 +6,7 @@ Haiiikk Yusup Onii-chan  >///<
 `.trim(), m)
     let mentionedJid = [m.sender]
 }
-handler.customPrefix = /Shiraori/i
+handler.customPrefix = /Ryuna/i
 handler.command = new RegExp
 
 module.exports = handler
