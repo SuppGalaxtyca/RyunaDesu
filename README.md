@@ -17,8 +17,8 @@
 * Unduh & Instal ImageMagick [`Klik Disini`](https://imagemagick.org/script/download.php)
 
 ```bash
-git clone https://github.com/Hidayatilman/ShiraoriBOT
-cd ShiraoriBOT
+git clone https://github.com/SuppGalaxtyca/RyunaDesu
+cd RyunaDesu
 npm install
 npm update
 npm index
