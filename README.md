@@ -1,7 +1,7 @@
 <p align="center">
-	<img src="https://media.giphy.com/media/Xr2km20NNBNqSN6iwu/giphy.gif" width="200" style="margin-left: auto;margin-right: auto;display: block;">
+	<img src="https://pin.it/5wWer7B" width="200" style="margin-left: auto;margin-right: auto;display: block;">
 </p>
-<h1 align="center">SHIRAORI BOT</h1>
+<h1 align="center">RYUNA CHAN</h1>
 
 ## ERROR, PROSES PERBAIKAN
 
