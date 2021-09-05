@@ -1,7 +1,7 @@
 {
-  "name": "ShiraoriBOT",
+  "name": "RYUNA-CHAN",
   "version": "1.1.1",
-  "description": "Shiraori wangyy",
+  "description": "Ryuna Milik Yusup",
   "main": "index.js",
   "scripts": {
     "start": "node index.js --self",
@@ -9,17 +9,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Hidayatilman/ShiraoriBOT.git"
+    "url": "git+https://github.com/SuppGalaxtyca/RyunaDesu.git"
   },
   "keywords": [
     "whatsapp-bot"
   ],
-  "author": "ilman",
+  "author": "Yusup",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Hidayatilman/ShiraoriBOT/issues"
+    "url": "https://github.com/SuppGalaxtyca/RyunaDesu/issues"
   },
-  "homepage": "https://github.com/Hidayatilman/ShiraoriBOT",
+  "homepage": "https://github.com/SuppGalaxtyca/RyunaDesu",
   "dependencies": {
     "@adiwajshing/baileys": "^3.5.2",
     "awesome-phonenumber": "^2.54.0",
