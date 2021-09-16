@@ -1,6 +1,6 @@
 let fs = require('fs')
-global.owner  = ['6281284160630']
-global.mods  = ['6281292064042'] // letakkan nomor kalian disini
+global.owner  = ['6281284160630'] // letakkan nomor kalian disini
+global.mods  = [] // Mods?
 global.prems = JSON.parse(fs.readFileSync('./src/premium.json')) // Pengguna premium tidak memerlukan limit
 global.APIs = { // API Prefix
   // nama: 'https://website'
@@ -11,6 +11,7 @@ global.APIs = { // API Prefix
   nrtm: 'https://nurutomo.herokuapp.com',
   pencarikode: 'https://pencarikode.xyz',
   xteam: 'https://api.xteam.xyz',
+  l0lhuman: 'https://api.lolhuman.xyz',
   zahir: 'https://zahirr-web.herokuapp.com',
   zekais: 'http://zekais-api.herokuapp.com',
   zeks: 'https://api.zeks.xyz',
@@ -21,14 +22,15 @@ global.APIKeys = { // APIKey nya disini
   'https://hardianto-chan.herokuapp.com': 'hardianto',
   'https://neoxr-api.herokuapp.com': 'yntkts',
   'https://pencarikode.xyz': 'pais',
-  'https://api.xteam.xyz': 'APIKEYMU',
+  'https://api.xteam.xyz': 'isi apikey lu',
+  'https://api.lolhuman.xyz': 'isi pake apikey lu',
   'https://zahirr-web.herokuapp.com': 'zahirgans',
   'https://api.zeks.xyz': 'apivinz',
 }
 
 // Sticker WM
-global.packname = 'RYUNA-CHAN'
-global.author = 'Ysupp'
+global.packname = 'RYUNAA'
+global.author = 'Oreking'
 
 global.wait = '_*tunggu..*_'
 
