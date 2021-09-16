@@ -1,52 +1,38 @@
-let buatall = 1
-let { MessageType } = require('@adiwajshing/baileys')
-let handler = async (m, { conn, args, usedPrefix, DevMode }) => {
-    conn.casino = conn.casino ? conn.casino : {}
-    if (m.chat in conn.casino) return m.reply ('Masih ada yang melakukan casino disini, tunggu sampai selesai!!')
-    else conn.casino[m.chat] = true
-    try {
-        let randomaku = `${Math.floor(Math.random() * 101)}`.trim()
-        let randomkamu = `${Math.floor(Math.random() * 81)}`.trim() //hehe Biar Susah Menang :v
-        let Aku = (randomaku * 1)
-        let Kamu = (randomkamu * 1)
-        let count = args[0]
-        count = count ? /all/i.test(count) ? Math.floor(global.DATABASE._data.users[m.sender].exp / buatall) : parseInt(count) : args[0] ? parseInt(args[0]) : 1
-        count = Math.max(1, count)
-        if (args.length < 1) return conn.reply(m.chat, usedPrefix + 'casino <jumlah>\n ' + usedPrefix + 'casino 1000', m)
-        if (global.DATABASE._data.users[m.sender].exp >= count * 1) {
-            global.DATABASE._data.users[m.sender].exp -= count * 1
-            //await m.reply('') //Kwkwwkkwlwlw
-            if (Aku > Kamu) {
-                conn.reply(m.chat, `💰 Casino 💰\n*Kamu:* ${Kamu} Point\n*Computer:* ${Aku} Point\n\n*You LOSE*\nKamu kehilangan ${count} Uang(xp)`.trim(), m)
-            } else if (Aku < Kamu) {
-                global.DATABASE._data.users[m.sender].exp += count * 2
-                conn.reply(m.chat, `💰 Casino 💰\n*Kamu:* ${Kamu} Point\n*Computer:* ${Aku} Point\n\n*You Win*\nKamu mendapatkan ${count * 2} Uang(xp)`.trim(), m)
-            } else {
-                global.DATABASE._data.users[m.sender].exp += count * 1
-                conn.reply(m.chat, `💰 Casino 💰\n*Kamu:* ${Kamu} Point\n*Computer:* ${Aku} Point\n\n*SERI*\nKamu mendapatkan ${count * 1} Uang(xp)`.trim(), m)
-            }
-        } else conn.reply(m.chat, `Uang(xp) kamu tidak mencukupi untuk Casino silahkan *#kerja* terlebih dahulu!`.trim(), m)
-    } catch (e) {
-        console.log(e)
-        m.reply('Error!!')
-        if (DevMode) {
-            for (let jid of global.owner.map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').filter(v => v != conn.user.jid)) {
-                conn.sendMessage(jid, 'casino.js error\nNo: *' + m.sender.split`@`[0] + '*\nCommand: *' + m.text + '*\n\n*' + e + '*', MessageType.text)
-            }
-        }
-    } finally {
-        delete conn.casino[m.chat]
-    }
-}
-    
-handler.help = ['casino <jumlah>']
-handler.tags = ['game']
-handler.command = /^(casino)$/i
+// cuma tes
+// gk tau bisa atau nggak
+// kalo error baikin aja sendiri
 
-handler.fail = null
+const role1 = []
+const role2 = []
+
+console.log('Player 1 Silahkan Spin Nomornya Dengan Ketik *.casino*');
+console.log('Roullet Berputar'):
+const role11 = Math.floor(Math.random() * 3);
+role1.push(role11);
+console.log ('Number Player 1 = ' ,role1);
+
+console.log('Player 2 Silahkan Spin Nomornya Dengan Ketik *.casino2*);
+console.log('Roullet Berputar');
+const role12 = Math.floor(Math.random() * 3);
+role2.push(role12);
+console.log ('Number Player 2 = ' ,role2);
+
+if (role1 == '0') {
+	console.log('Player 1 Telah Memenangkan Pertandingan');
+} else if ('role2 == '0'){
+	console.log('Player 1 Telah Memenangkan Pertandingan')
+}
+else if (role1 > role2){
+	console.log('Player 1 Telah Memenangkan Pertandingan');
+}
+else if (role1 < role2){
+	console.log('Player 2  Telah Memenangkan Pertandingan');
+}
+else {
+	console.log('Seri');
+}
+handler.help = ['casino']
+handler.tags = ['game']
+handler.command = /^(casino)?)$/i
 
 module.exports = handler
-
-function pickRandom(list) {
-    return list[Math.floor(Math.random() * list.length)]
-}
