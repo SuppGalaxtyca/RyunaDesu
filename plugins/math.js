@@ -2,13 +2,11 @@ let handler = async (m, { conn, args, usedPrefix }) => {
   conn.math = conn.math ? conn.math : {}
   if (args.length < 1) throw `
 Mode: ${Object.keys(modes).join(' | ')}
-
 Contoh penggunaan: ${usedPrefix}math hard
 `.trim()
   let mode = args[0].toLowerCase()
   if (!(mode in modes)) throw `
 Mode: ${Object.keys(modes).join(' | ')}
-
 Contoh penggunaan: ${usedPrefix}math hard
 `.trim()
   let id = m.chat
@@ -27,7 +25,7 @@ handler.help = ['math <mode>']
 handler.tags = ['game']
 handler.command = /^math/i
 
-handler.limit = 300
+handler.limit = 0
 
 module.exports = handler
 
