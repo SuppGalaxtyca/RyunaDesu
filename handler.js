@@ -418,7 +418,6 @@ module.exports = {
     if (chat.delete) return
     await this.sendButton(m.key.remoteJid, `
 Terdeteksi @${m.participant.split`@`[0]} telah menghapus pesan
-
 ketik *.on delete* untuk mematikan pesan ini
 `.trim(), '', 'MATIKAN ANTI DELETE', ',on delete', {
       quoted: m.message,
@@ -452,9 +451,7 @@ ketik *.on delete* untuk mematikan pesan ini
     else {
       let caption = `
     @${descOwner.split`@`[0]} telah mengubah deskripsi grup.
-
     ${desc}
-
     ketik *.off desc* untuk mematikan pesan ini
         `.trim()
       this.sendButton(jid, caption, '', 'MATIKAN DESKRIPSI', ',off desc', { contextInfo: { mentionedJid: this.parseMention(caption) } })
@@ -472,7 +469,7 @@ global.dfail = (type, m, conn) => {
     private: 'Perintah ini hanya dapat digunakan di Chat Pribadi',
     admin: 'Perintah ini hanya untuk *Admin* grup',
     botAdmin: 'Jadikan bot sebagai *Admin* untuk menggunakan perintah ini',
-    unreg: 'Silahkan daftar untuk menggunakan fitur ini dengan cara mengetik:\n\n*#daftar nama.umur*\n\nContoh: *#daftar Arif.19*',
+    unreg: 'Silahkan daftar untuk menggunakan fitur ini dengan cara mengetik:\n\n*#daftar nama.umur*\n\nContoh: *#daftar Ysup.17*',
     nsfw: 'NSFW tidak aktif'
   }[type]
   if (msg) return m.reply(msg)
