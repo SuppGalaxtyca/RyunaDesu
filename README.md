@@ -1,9 +1,9 @@
 <p align="center">
-	<img src="https://pin.it/5wWer7B" width="200" style="margin-left: auto;margin-right: auto;display: block;">
+	<img src="https://media.giphy.com/media/Xr2km20NNBNqSN6iwu/giphy.gif" width="200" style="margin-left: auto;margin-right: auto;display: block;">
 </p>
-<h1 align="center">RYUNA CHAN</h1>
+<h1 align="center">RYUNA DESU</h1>
 
-## ERROR, PROSES PERBAIKAN
+## error fix it yourself 
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/HidayatilmanShiraoriBOT)
 
@@ -25,6 +25,14 @@ npm index
 ```
 
 ---------
+
+## untuk pengguna termux
+
+* git clone https://github.com/SuppGalaxtyca/RyunaDesu  --branch termux
+* cd RyunaDesu
+* npm i
+* npm update
+* node .
 
 ## UNTUK PENGGUNA HEROKU
 
@@ -88,7 +96,7 @@ Jika qr unicode kecil tidak mendukung
 
 Mengaktifkan plugin terbatas (yang dapat menyebabkan nomor Anda **diblokir** jika digunakan terlalu sering)
 
-* Administrasi Grup `add, kick, promote, demote, kickall`
+* Administrasi Grup `add, kick, promote, demote`
 
 ### `--img`
 
@@ -131,5 +139,10 @@ conn.logger.level = 'debug'
 * [`ariffb25`](https://github.com/ariffb25) 
 * [`ilman`](https://github.com/Hidayatilman) 
 * [`botstylee`](https://github.com/botstylee)
+* [`Ysupp`](https://github.com/SuppGalaxtyca)
+
+### Donated
+
+[`Saweria`](https://saweria.co/manilman)
 
 
