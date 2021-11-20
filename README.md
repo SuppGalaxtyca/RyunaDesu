@@ -136,10 +136,10 @@ conn.logger.level = 'debug'
 
 ---------
 
- [![Nurutomo](https://github.com/Nurutomo.png?size=150)](https://github.com/Nurutomo) | [![Ariffb](https://github.com/ariffb25.png?size=150)](https://github.com/ariffb25) | [![ilmanhdyt](https://github.com/ilmanhdyt.png?size=150)](https://github.com/ilmanhdyt) | [![SuppGltx](https://github.com/SuppGalaxtyca.png?size=150)](https://github.com/SuppGalaxtyca)
+ [![SuppGltx](https://github.com/SuppGalaxtyca.png?size=150)](https://github.com/SuppGalaxtyca)
 ----|----|----
-[Nurutomo](https://github.com/Nurutomo) | [Ariffb](https://github.com/ariffb25) | [ilmanhdyt](https://github.com/ilmanhdyt) | [SuppGltx](https://github.com/SuppGalaxtyca)
- Penulis / Pencipta | Penulis ulang | Kang recode | Recode
+[SuppGltx](https://github.com/SuppGalaxtyca)
+ Recode
  
 
 ### Donated
