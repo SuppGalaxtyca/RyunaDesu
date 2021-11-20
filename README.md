@@ -1,7 +1,7 @@
 <p align="center">
 	<img src="https://media.giphy.com/media/Xr2km20NNBNqSN6iwu/giphy.gif" width="200" style="margin-left: auto;margin-right: auto;display: block;">
 </p>
-<h1 align="center">SHIRAORI BOT</h1>
+<h1 align="center">RYUNA CHAN</h1>
 
 
 
@@ -22,8 +22,8 @@
 * Unduh & Instal ImageMagick [`Klik Disini`](https://imagemagick.org/script/download.php)
 
 ```bash
-git clone https://github.com/ilmanhdyt/ShiroBOT
-cd ShiroBOT
+git clone https://github.com/SuppGalaxtyca/RyunaDesu
+cd RyunaDesu
 npm install
 npm update
 npm index
@@ -33,8 +33,8 @@ npm index
 
 ## UNTUK PENGGUNA TERMUX
 ```bash
-git clone https://github.com/ilmanhdyt/ShiraoriBOT
-cd ShiraoriBOT
+git clone https://github.com/SuppGalaxtyca/RyunaDesu
+cd RyunaDesu
 npm i
 npm update
 pkg install bash
