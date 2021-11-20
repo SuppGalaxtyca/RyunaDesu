@@ -1,13 +1,18 @@
 <p align="center">
 	<img src="https://media.giphy.com/media/Xr2km20NNBNqSN6iwu/giphy.gif" width="200" style="margin-left: auto;margin-right: auto;display: block;">
 </p>
-<h1 align="center">RYUNA DESU</h1>
+<h1 align="center">SHIRAORI BOT</h1>
 
-## error fix it yourself 
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/HidayatilmanShiraoriBOT)
 
-[![Grup WhatsApp](https://img.shields.io/badge/WhatsApp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://chat.whatsapp.com/GVwpKf83s42D1CnIfDW19G)
+## NOTE
+* Gunakan repo ini jika kalian memakai Termux
+* jika kalian memakai Rdp Gunakan repo [`ShiroBOT`](https://github.com/ilmanhdyt/ShiroBOT)
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/ilmanhdyt/ShiraoriBOT)
+
+[![Grup WhatsApp](https://img.shields.io/badge/GroupWhatsapp-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://chat.whatsapp.com/D7TmQm7UcfIBELBux19kIA)
+
 
 ## UNTUK PENGGUNA WINDOWS/VPS/RDP
 
@@ -17,8 +22,8 @@
 * Unduh & Instal ImageMagick [`Klik Disini`](https://imagemagick.org/script/download.php)
 
 ```bash
-git clone https://github.com/SuppGalaxtyca/RyunaDesu
-cd RyunaDesu
+git clone https://github.com/ilmanhdyt/ShiroBOT
+cd ShiroBOT
 npm install
 npm update
 npm index
@@ -26,13 +31,16 @@ npm index
 
 ---------
 
-## untuk pengguna termux
-
-* git clone https://github.com/SuppGalaxtyca/RyunaDesu  --branch termux
-* cd RyunaDesu
-* npm i
-* npm update
-* node .
+## UNTUK PENGGUNA TERMUX
+```bash
+git clone https://github.com/ilmanhdyt/ShiraoriBOT
+cd ShiraoriBOT
+npm i
+npm update
+pkg install bash
+bash install.sh
+node .
+```
 
 ## UNTUK PENGGUNA HEROKU
 
@@ -96,7 +104,7 @@ Jika qr unicode kecil tidak mendukung
 
 Mengaktifkan plugin terbatas (yang dapat menyebabkan nomor Anda **diblokir** jika digunakan terlalu sering)
 
-* Administrasi Grup `add, kick, promote, demote`
+* Administrasi Grup `add, kick, promote, demote`, `kickall`
 
 ### `--img`
 
@@ -128,21 +136,12 @@ conn.logger.level = 'debug'
 
 ---------
 
- [![Nurutomo](https://github.com/Nurutomo.png?size=100)](https://github.com/Nurutomo) | [![Ariffb](https://github.com/ariffb25.png?size=100)](https://github.com/ariffb25)
-----|----
-[Nurutomo](https://github.com/Nurutomo) | [Ariffb](https://github.com/ariffb25)
- Penulis / Pencipta | Penulis ulang
+ [![Nurutomo](https://github.com/Nurutomo.png?size=150)](https://github.com/Nurutomo) | [![Ariffb](https://github.com/ariffb25.png?size=150)](https://github.com/ariffb25) | [![ilmanhdyt](https://github.com/ilmanhdyt.png?size=150)](https://github.com/ilmanhdyt)
+----|----|----
+[Nurutomo](https://github.com/Nurutomo) | [Ariffb](https://github.com/ariffb25) | [ilmanhdyt](https://github.com/ilmanhdyt)
+ Penulis / Pencipta | Penulis ulang | Kang recode
  
-## Thanks To
-
-* [`Nurutomo`](https://github.com/Nurutomo) 
-* [`ariffb25`](https://github.com/ariffb25) 
-* [`ilman`](https://github.com/Hidayatilman) 
-* [`botstylee`](https://github.com/botstylee)
-* [`Ysupp`](https://github.com/SuppGalaxtyca)
 
 ### Donated
 
-[`Saweria`](https://saweria.co/manilman)
-
-
+[`Saweria`](https://saweria.co/ilmanhdyt)

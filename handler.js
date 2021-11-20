@@ -46,6 +46,7 @@ module.exports = {
           if (!('autolevelup' in user)) user.autolevelup = false
           if (!isNumber(user.pc)) user.pc = 0
           if (!isNumber(user.warning)) user.warning = 0
+          if (!('pasangan' in user)) user.pasangan = ''
         } else global.db.data.users[m.sender] = {
           exp: 0,
           limit: 10,
@@ -63,6 +64,7 @@ module.exports = {
           autolevelup: false,
           pc: 0,
           warning: 0,
+          pasangan: '',
         }
 
         let chat = global.db.data.chats[m.chat]
@@ -167,6 +169,7 @@ module.exports = {
         if (!plugin) continue
         if (plugin.disabled) continue
         if (!opts['restrict']) if (plugin.tags && plugin.tags.includes('admin')) continue
+        if (!opts['nsfw']) if (plugin.tags && plugin.tags.includes('nsfw')) continue
         const str2Regex = str => str.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&')
         let _prefix = plugin.customPrefix ? plugin.customPrefix : conn.prefix ? conn.prefix : global.prefix
         let match = (_prefix instanceof RegExp ? // RegExp Mode?
@@ -418,6 +421,7 @@ module.exports = {
     if (chat.delete) return
     await this.sendButton(m.key.remoteJid, `
 Terdeteksi @${m.participant.split`@`[0]} telah menghapus pesan
+
 ketik *.on delete* untuk mematikan pesan ini
 `.trim(), '', 'MATIKAN ANTI DELETE', ',on delete', {
       quoted: m.message,
@@ -440,8 +444,8 @@ ketik *.on delete* untuk mematikan pesan ini
         break
     }
     user.call += 1
-    await this.reply(from, `Jika kamu menelepon lebih dari 5, kamu akan diblokir.\n\n${user.call} / 5`, null)
-    if (user.call == 5) {
+    await this.reply(from, `Jika kamu menelepon lebih dari 2, kamu akan diblokir.\n\n${user.call} / 2`, null)
+    if (user.call == 2) {
       await this.blockUser(from, 'add')
       user.call = 0
     }
@@ -451,7 +455,9 @@ ketik *.on delete* untuk mematikan pesan ini
     else {
       let caption = `
     @${descOwner.split`@`[0]} telah mengubah deskripsi grup.
+
     ${desc}
+
     ketik *.off desc* untuk mematikan pesan ini
         `.trim()
       this.sendButton(jid, caption, '', 'MATIKAN DESKRIPSI', ',off desc', { contextInfo: { mentionedJid: this.parseMention(caption) } })
@@ -461,15 +467,15 @@ ketik *.on delete* untuk mematikan pesan ini
 
 global.dfail = (type, m, conn) => {
   let msg = {
-    rowner: 'Perintah ini hanya dapat digunakan oleh _*Pemilik Bot*_',
-    owner: 'Perintah ini hanya dapat digunakan oleh _*Pemilik Bot*_',
-    mods: 'Perintah ini hanya dapat digunakan oleh _*Moderator*_',
+    rowner: 'Perintah ini hanya dapat digunakan oleh _*Ilman*_',
+    owner: 'Perintah ini hanya dapat digunakan oleh _*Ilman*_',
+    mods: 'Perintah ini hanya dapat digunakan oleh _*Admin Shiraori*_',
     premium: 'Perintah ini hanya untuk pengguna _*Premium*_',
     group: 'Perintah ini hanya dapat digunakan di grup',
     private: 'Perintah ini hanya dapat digunakan di Chat Pribadi',
     admin: 'Perintah ini hanya untuk *Admin* grup',
     botAdmin: 'Jadikan bot sebagai *Admin* untuk menggunakan perintah ini',
-    unreg: 'Silahkan daftar untuk menggunakan fitur ini dengan cara mengetik:\n\n*#daftar nama.umur*\n\nContoh: *#daftar Ysup.17*',
+    unreg: 'Silahkan daftar untuk menggunakan fitur ini dengan cara mengetik:\n\n*.daftar nama.umur*\n\nContoh: *.daftar ilman.16*',
     nsfw: 'NSFW tidak aktif'
   }[type]
   if (msg) return m.reply(msg)
