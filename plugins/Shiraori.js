@@ -12,17 +12,16 @@ function pickRandom(list) {
   return list[Math.floor(list.length * Math.random())]
 }
 
-global.shiraori = [
+global.ryuna = [
 'halo kak',
 'knp kak',
 'kak jalan yuk>_<',
 'jangan ganggu shiraori lagi sibuk',
-'bentar ewe dulu ama ilman',
-'Shiraori lagi makan',
-'Shiraori disini',
+'Ryuna lagi makan',
+'Ryuna disini',
 'Donasi dulu',
-'Shiraori pengen punya adik, tapi gk dibolehin ama ilman:(',
+'Ryuna pengen punya adik, tapi gk dibolehin sama Yusp:(',
 'bagi duit dulu/',
 'Silahkan ketik .menu ya kak',
-'Shiraori istirahat dulu',
+'Ryuna istirahat dulu',
 ]
