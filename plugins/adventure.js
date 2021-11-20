@@ -1,15 +1,15 @@
 let { MessageType } = require('@adiwajshing/baileys')
 let handler = async (m, { conn, usedPrefix, DevMode }) => { 
     try { 
-        let __timers = (new Date - global.DATABASE._data.users[m.sender].lastclaim)
+        let __timers = (new Date - global.db.data.users[m.sender].lastadventure)
         let _timers = (300000 - __timers) 
         let timers = clockString(_timers)
-        if (global.DATABASE._data.users[m.sender].healt > 79) {
-            if (new Date - global.DATABASE._data.users[m.sender].lastclaim > 300000) {
-            let armor = global.DATABASE._data.users[m.sender].armor
-            let rubah = global.DATABASE._data.users[m.sender].rubah
-            let kuda = global.DATABASE._data.users[m.sender].kuda
-            let kucing = global.DATABASE._data.users[m.sender].kucing
+        if (global.db.data.users[m.sender].healt > 79) {
+            if (new Date - global.db.data.users[m.sender].lastadventure > 300000) {
+            let armor = global.db.data.users[m.sender].armor
+            let rubah = global.db.data.users[m.sender].rubah
+            let kuda = global.db.data.users[m.sender].kuda
+            let kucing = global.db.data.users[m.sender].kucing
             let ____health = `${Math.floor(Math.random() * 101)}`.trim()
             let ___health = (____health * 1)
             let kucingnya = (kucing == 0? 0 : '' || kucing == 1 ? 5 : '' || kucing == 2 ? 10 : '' || kucing == 3 ? 15 : '' || kucing == 4 ? 21 : ''  || kucing == 5 ? 30 : '')
@@ -32,45 +32,46 @@ let handler = async (m, { conn, usedPrefix, DevMode }) => {
             let sampah = `${Math.floor(Math.random() * 300)}`.trim()
             let legendary = (_legendary * 1)
             let str = `
-Nyawa mu berkurang -${healt * 1} karena Kamu telah berpetualang sampai ${pickRandom(['Jepang', 'Korea', 'Bali', 'Amerika', 'Israel', 'German', 'Finlandia', 'Ke bawa dunia mimpi', 'Ujung dunia', 'Mars', 'Bulan', 'Pluto', 'Matahari', 'Hatinya dia', '...'])} dan mendapatkan
+Nyawa mu berkurang -${healt * 1} karena Kamu telah berpetualang sampai ${pickRandom(['Jepang', 'Korea', 'Bali', 'Amerika', 'Iraq', 'Arab', 'Pakistan', 'German', 'Finlandia', 'Ke bawa dunia mimpi', 'Ujung dunia', 'Mars', 'Bulan', 'Pluto', 'Matahari', 'Hatinya dia', '...'])} dan mendapatkan
 *exp:* ${exp} 
 *uang:* ${uang}
 *sampah:* ${sampah}${potion == 0 ? '' : '\n*Potion:* ' + potion + ''}${diamond == 0 ? '' : '\n*diamond:* ' + diamond + ''}${common == 0 ? '' : '\n*common crate:* ' + common + ''}${uncommon == 0 ? '' : '\n*uncommon crate:* ' + uncommon + ''}
 `.trim()
             conn.reply(m.chat, str, m)
             if (mythic > 0) {
-                   global.DATABASE._data.users[m.sender].mythic += mythic * 1
+                   global.db.data.users[m.sender].mythic += mythic * 1
                    conn.reply(m.chat, '*Selamat anda mendapatkan item Rare yaitu*\n' + mythic + ' Mythic Crate', m)
             }
             if (legendary > 0) {
-                global.DATABASE._data.users[m.sender].legendary += legendary * 1
+                global.db.data.users[m.sender].legendary += legendary * 1
                 conn.reply(m.chat, '*Selamat anda mendapatkan item Epic yaitu*\n' + legendary + ' Legendary Crate', m)
             }
-            global.DATABASE._data.users[m.sender].healt -= healt * 1
-            global.DATABASE._data.users[m.sender].exp += exp * 1
-            global.DATABASE._data.users[m.sender].money += uang * 1
-            global.DATABASE._data.users[m.sender].potion += potion * 1
-            global.DATABASE._data.users[m.sender].diamond += diamond * 1
-            global.DATABASE._data.users[m.sender].common += common * 1 
-            global.DATABASE._data.users[m.sender].uncommon += uncommon * 1
-            global.DATABASE._data.users[m.sender].sampah += sampah * 1
-            global.DATABASE._data.users[m.sender].lastclaim = new Date * 1
+            global.db.data.users[m.sender].healt -= healt * 1
+            global.db.data.users[m.sender].exp += exp * 1
+            global.db.data.users[m.sender].money += uang * 1
+            global.db.data.users[m.sender].potion += potion * 1
+            global.db.data.users[m.sender].diamond += diamond * 1
+            global.db.data.users[m.sender].common += common * 1 
+            global.db.data.users[m.sender].uncommon += uncommon * 1
+            global.db.data.users[m.sender].sampah += sampah * 1
+            global.db.data.users[m.sender].lastadventure = new Date * 1
             } else conn.reply(m.chat, `Anda sudah berpetualang dan kelelahan, silahkan coba *${timers}* lagi`, m)
-        } else conn.reply(m.chat, 'Minimal 80 health untuk bisa berpetualang, beli nyawa dulu dengan ketik *' + usedPrefix + 'shop buy potion <jumlah>*\ndan ketik *' + usedPrefix + 'use potion <jumlah>*\n\n_Untuk mendapat money dan potion gratis ketik_ *' + usedPrefix + 'claim*', m)
+        } else conn.reply(m.chat, 'Minimal 80 health untuk bisa berpetualang, beli nyawa dulu dengan ketik *' + usedPrefix + 'shop buy potion <jumlah>*\ndan ketik *' + usedPrefix + 'use potion <jumlah>*\n\n_Untuk mendapat money dan potion gratis ketik_ *' + usedPrefix + 'collect*', m)
     } catch (e) {
         console.log(e)
-        conn.reply(m.chat, 'Error', n)
+        conn.reply(m.chat, 'Error', m)
         if (DevMode) {
+            let file = require.resolve(__filename)
             for (let jid of global.owner.map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').filter(v => v != conn.user.jid)) {
-                conn.sendMessage(jid, 'Use error\nNo: *' + m.sender.split`@`[0] + '*\nCommand: *' + m.text + '*\n\n*' + e + '*', MessageType.text)
+                conn.sendMessage(jid, file + ' error\nNo: *' + m.sender.split`@`[0] + '*\nCommand: *' + m.text + '*\n\n*' + e + '*', MessageType.text)
             }
         }
     }
 }
-handler.help = ['adventure', 'petualang', 'berpetualang', 'mulung', 'work']
+handler.help = ['adventure']
 handler.tags = ['rpg']
 handler.command = /^(adventure|(ber)?petualang(ang)?|mulung|work)$/i
-
+handler.group = true
 handler.fail = null
 
 module.exports = handler

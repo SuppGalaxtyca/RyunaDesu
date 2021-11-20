@@ -1,12 +1,11 @@
 let handler = async (m, { conn }) => {
-
-  conn.sendFile(m.chat, 'https://api.xteam.xyz/randomimage/cewe?APIKEY=4a8b9aba75823076', '', '© shiraori', m)
+ await conn.sendFile(m.chat, global.API('xteam', '/randomimage/cewe', { text: © SHIRAORI }, ,APIKEY'), 'cewek.jpg', teks, m)
 }
 handler.help = ['cewek']
-handler.tags = ['premium']
+handler.tags = ['random']
 handler.command = /^(cewek)$/i
 
-handler.premium = true
+handler.limit = true
 
 
 module.exports = handler

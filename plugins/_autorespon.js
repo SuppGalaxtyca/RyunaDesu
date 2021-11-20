@@ -14,9 +14,9 @@ handler.all = async function (m, { isBlocked }) {
     try {
         if (m.mentionedJid.includes(this.user.jid) && m.isGroup) {
             await this.send2Button(m.chat,
-                isBanned ? 'Ryuna tidak aktif' : banned ? 'kamu dibanned' : 'Ryuna Disini',
-                '© Ryuna',
-                isBanned ? 'UNBAN' : banned ? 'PEMILIK RYUNA' : 'MENU',
+                isBanned ? 'Haiik Shiraori Tidak aktif' : banned ? 'Onii-chan Shiraori mau bilang kamu dibanned' : 'Shiraori Disini',
+                '© Shiraori',
+                isBanned ? 'UNBAN' : banned ? 'PEMILIK SHIRAORI' : 'MENU',
                 isBanned ? '.unban' : banned ? '.owner' : '.?',
                 m.isGroup ? 'BAN' : isBanned ? 'UNBAN' : 'DONASI',
                 m.isGroup ? '.ban' : isBanned ? '.unban' : '.donasi')
@@ -33,15 +33,15 @@ handler.all = async function (m, { isBlocked }) {
 ├ Premium / Rp 5,000
 └────
 
-wa.me/6281284160630
-`.trim(), '© Ryuna', 'PEMILIK RYUNA', ',owner', { contextInfo: { mentionedJid: [global.owner[0] + '@s.whatsapp.net'] } })
+wa.me/6281351047727
+`.trim(), '© Shiraori', 'PEMILIK SHIRAORI', ',owner', { contextInfo: { mentionedJid: [global.owner[0] + '@s.whatsapp.net'] } })
     }
 
     // salam
     let reg = /(ass?alam|اَلسَّلاَمُ عَلَيْكُمْ|السلام عليکم)/i
     let isSalam = reg.exec(m.text)
     if (isSalam && !m.fromMe) {
-        m.reply(`وَعَلَيْكُمْ السَّلاَمُ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ\n_wa\'alaikumussalam wr.wb._`)
+        m.reply(`wa\'alaikumussalam wr.wb.`)
     }
 
     // backup db
@@ -64,7 +64,7 @@ wa.me/6281284160630
     if (new Date() * 1 - setting.status > 1000) {
         let _uptime = process.uptime() * 1000
         let uptime = clockString(_uptime)
-        await this.setStatus(`Aktif selama ${uptime} | Mode: ${global.opts['self'] ? 'Private' : setting.groupOnly ? 'Hanya Grup' : 'Publik'} | RYUNA CHAN oleh YUSUP`).catch(_ => _)
+        await this.setStatus(`Aktif selama ${uptime} | Mode: ${global.opts['self'] ? 'Private' : setting.groupOnly ? 'Hanya Grup' : 'Publik'} | SHIRAORI BOT`).catch(_ => _)
         setting.status = new Date() * 1
     }
 
