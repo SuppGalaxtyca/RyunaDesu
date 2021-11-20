@@ -36,27 +36,21 @@ Seseorang telah menggunakan kode referal kamu
     let command_link = `wa.me/${conn.user.jid.split('@')[0]}?text=${encodeURIComponent(command_text)}`
     let share_text = `
 Dapatkan ${xp_first_time} XP untuk yang menggunakan link/kode referal dibawah ini
-
 Referal Code: *${code}*
-
 ${command_link}
 `.trim()
     m.reply(`
 Dapatkan ${xp_link_creator} XP untuk setiap pengguna baru yang menggunakan kode referal kamu
 ${users[m.sender].ref_count} orang telah menggunakan kode referal kamu
-
 Kode referal kamu: ${code}
-
 Bagikan link kepada teman: ${command_link}
-
 atau kirim pesan kepada teman wa.me/?text=${encodeURIComponent(share_text)}
-
 ${Object.entries(xp_bonus).map(([count, xp]) => `${count} Orang = Bonus ${xp} XP`).join('\n')}
 `.trim())
   }
 }
 handler.help = ['ref']
-handler.tags = ['xp']
+handler.tags = ['fun']
 
 handler.command = ['ref']
 

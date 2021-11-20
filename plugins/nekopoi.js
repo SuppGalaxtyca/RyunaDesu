@@ -1,20 +1,18 @@
+let { getVideo } = require('../lib/nekopoi')
 
-
-let fetch = require('node-fetch')
-let handler = async function (m, { text, isPrems, isOwner }) {
-	let user = global.DATABASE._data.users[m.sender]
-    if (!text) throw '_yg dicari apa_'
-    await m.reply(global.wait)
-  let res = await fetch('https://api.lolhuman.xyz/api/nekopoisearch?apikey=39f938655e624cb72a79560b&query=' + encodeURIComponent(text))
-let json= await res.json()
-  const ardi =  `*judul:* "${json.title}"\n\n*info:* ${json.info}\n\n*sinopsis:* ${json.sinopsis}\n\n*link download:* ${json.link_dl}`
-     conn.sendFile(m.chat,json.thumb, 'image.jpg', ardi, m)
+let handler = async (m, { text }) => {
+ if (!text) throw 'Tidak Ada Url'
+ let { title, links } = await getVideo(text)
+ if (links.length == 0) throw 'Video Tidak Ditemukan!'
+ teksnya = `*[NEKOPOI DOWNLOADER]*\n\nTitle : ${title}\n\n${links.join('\n')}`
+ m.reply(teksnya.trim())
 }
-handler.help = ['nekopoi <judul>']
+handler.help = ['nekopoi'].map(v => v + ' <url>')
 handler.tags = ['nsfw']
 handler.command = /^nekopoi$/i
+
+handler.nsfw = true
 handler.group = true
 handler.limit = true
 
 module.exports = handler
-

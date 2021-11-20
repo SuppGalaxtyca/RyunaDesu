@@ -1,11 +1,16 @@
+const fetch = require('node-fetch')
+
 let handler = async (m, { conn }) => {
-  conn.sendFile(m.chat, 'https://api.lolhuman.xyz/api/pixiv?apikey=39f938655e624cb72a79560b&query=loli%20kawaii', '', '', m)
+    let res = await fetch(global.API('lolhum', '/api/konachan', {}, 'apikey'))
+    if (!res.ok) throw await res.text()
+    let img = await res.buffer()
+    if (!img) throw img
+    conn.sendFile(m.chat, img, '', '© SHIRAORI', m, 0, { thumbnail: await (await fetch(img)).buffer()
 }
-handler.help = ['pixiv (pencarian)']
+handler.help = ['kona']
 handler.tags = ['internet']
-handler.command = /^(pixiv)$/i
+handler.command = /^(kona)$/i
 
 handler.limit = true
-handler.group = true
 
 module.exports = handler

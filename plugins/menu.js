@@ -1,13 +1,16 @@
+let levelling = require('../lib/levelling')
+let { MessageType } = require('@adiwajshing/baileys')
 let fs = require('fs')
 let path = require('path')
-let levelling = require('../lib/levelling')
+let fetch = require('node-fetch')
+let moment = require('moment-timezone')
 const defaultMenu = {
   before: `
-  ━━━━ 「 *RYUNA CHAN* 」 ━━━━͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏͏
+‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎‎
 %readmore`.trimStart(),
-  header: '╔══✪〔 %category 〕✪══',
-  body: '╠➥%cmd %islimit %isPremium',
-  footer: '╚═〘 RYUNA CHAN 〙\n',
+  header: '╭━━━〔 %category 〕━━━┈',
+  body: '│◦➛ %cmd %islimit %isPremium',
+  footer: '└────────────┈ ⳹\n',
   after: `
 *%npmname@^%version*
 ${'```%npmdesc```'}
@@ -16,10 +19,14 @@ ${'```%npmdesc```'}
 let handler = async (m, { conn, usedPrefix: _p, args, command }) => {
   let tags
   let teks = `${args[0]}`.toLowerCase()
+  let arrayMenu = ['all', 'game', 'rpg', 'jadian', 'xp', 'stiker', 'kerangajaib', 'quotes', 'admin', 'grup', 'premium', 'adminban', 'internet', 'anime', 'nsfw', 'anonymous', 'nulis', 'downloader', 'tools', 'fun', 'database', 'quran', 'audio', 'jadibot', 'info', 'tanpakategori', 'owner']
+  if (!arrayMenu.includes(teks)) teks = '404'
   if (teks == 'all') tags = {
     'main': 'Utama',
+    'ilman': 'ilman',
     'game': 'Game',
-    'rpg': 'Rpg',
+    'rpg': `Rpg ${global.opts['restrict'] ? '' : '(perbaikan)'}`,
+    'jadian': 'Jadian',
     'xp': 'Exp & Limit',
     'sticker': 'Stiker',
     'kerang': 'Kerang Ajaib',
@@ -27,7 +34,10 @@ let handler = async (m, { conn, usedPrefix: _p, args, command }) => {
     'admin': `Admin ${global.opts['restrict'] ? '' : '(Dinonaktifkan)'}`,
     'group': 'Grup',
     'premium': 'Premium',
+    'adminban': 'Adminban',
     'internet': 'Internet',
+    'anime': 'Anime',
+    'nsfw': `Nsfw ${global.opts['nsfw'] ? '' : '(Dinonaktifkan)'}`,
     'anonymous': 'Anonymous Chat',
     'nulis': 'MagerNulis & Logo',
     'downloader': 'Downloader',
@@ -39,16 +49,20 @@ let handler = async (m, { conn, usedPrefix: _p, args, command }) => {
     'quran': 'Al Qur\'an',
     'audio': 'Pengubah Suara',
     'jadibot': 'Jadi Bot',
-    'nsfw': 'Nsfw',
-    'anime': 'Anime',
     'info': 'Info',
     '': 'Tanpa Kategori',
+  }
+  if (teks == 'ilman') tags = {
+    'ilman': 'ilman'
   }
   if (teks == 'game') tags = {
     'game': 'Game'
   }
   if (teks == 'rpg') tags = {
-    'rpg': `Rpg : (error)`
+    'rpg': `Rpg ${global.opts['restrict'] ? '' : '(Dinonaktifkan)'}`
+  }
+  if (teks == 'jadian') tags = {
+    'jadian': 'Jadian'
   }
   if (teks == 'xp') tags = {
     'xp': 'Exp & Limit'
@@ -56,7 +70,7 @@ let handler = async (m, { conn, usedPrefix: _p, args, command }) => {
   if (teks == 'stiker') tags = {
     'sticker': 'Stiker'
   }
-  if (teks == 'kerang') tags = {
+  if (teks == 'kerangajaib') tags = {
     'kerang': 'Kerang Ajaib'
   }
   if (teks == 'quotes') tags = {
@@ -71,8 +85,17 @@ let handler = async (m, { conn, usedPrefix: _p, args, command }) => {
   if (teks == 'premium') tags = {
     'premium': 'Premium'
   }
+  if (teks == 'adminban') tags = { 
+    'adminban': 'Adminban'
+  }
   if (teks == 'internet') tags = {
     'internet': 'Internet'
+  }
+  if (teks == 'anime') tags = {
+    'anime': 'Anime'
+  }
+  if (teks == 'nsfw') tags = {
+    'nsfw': `Nsfw ${global.opts['nsfw'] ? '' : '(Dinonaktifkan)'}`
   }
   if (teks == 'anonymous') tags = {
     'anonymous': 'Anonymous Chat'
@@ -105,12 +128,6 @@ let handler = async (m, { conn, usedPrefix: _p, args, command }) => {
   if (teks == 'jadibot') tags = {
     'jadibot': 'Jadi Bot'
   }
-  if (teks == 'nsfw') tags = {
-    'nsfw': 'Nsfw'
-  }
-  if (teks == 'anime') tags = {
-    'anime': 'Anime'
-  }
   if (teks == 'info') tags = {
     'info': 'Info'
   }
@@ -123,168 +140,11 @@ let handler = async (m, { conn, usedPrefix: _p, args, command }) => {
     'advanced': 'Advanced'
   }
 
-  if (!args[0]) {
-    conn.relayWAMessage(conn.prepareMessageFromContent(m.chat, {
-      "listMessage": {
-        "title": "Daftar Menu",
-        "description": "© Ryuna><",
-        "buttonText": "Klik Disini",
-        "listType": "SINGLE_SELECT",
-        "sections": [
-          {
-            "rows": [
-              {
-                "title": `Semua Perintah`,
-                "description": "",
-                "rowId": ".? all"
-              }, {
-                "title": "Game",
-                "description": "",
-                "rowId": ".? game"
-                
-              }, {
-                "title": "Rpg",
-                "description": "",
-                "rowld": ".? rpg"
 
-              }, {
-                "title": "XP",
-                "description": "",
-                "rowId": ".? xp"
-
-              }, {
-                "title": "Stiker",
-                "description": "",
-                "rowId": ".? stiker"
-              }, {
-                "title": "Kerang Ajaib",
-                "description": "",
-                "rowId": ".? kerang"
-              }, {
-                "title": "Quotes",
-                "description": "",
-                "rowId": ".? quotes"
-              }, {
-                "title": "Admin",
-                "description": "",
-                "rowId": ".? admin"
-              }, {
-                "title": "Grup",
-                "description": "",
-                "rowId": ".? grup"
-              }, {
-                "title": "Premium",
-                "description": "",
-                "rowId": ".? premium"
-              }, {
-                "title": "Internet",
-                "description": "",
-                "rowId": ".? internet"
-              }, {
-                "title": "Anonymous",
-                "description": "",
-                "rowId": ".? anonymous"
-              }, {
-                "title": "Nulis & Logo",
-                "description": "",
-                "rowId": ".? nulis"
-              }, {
-                "title": "Downloader",
-                "description": "",
-                "rowId": ".? downloader"
-              }, {
-                "title": "Tools",
-                "description": "",
-                "rowId": ".? tools"
-              }, {
-                "title": "Fun",
-                "description": "",
-                "rowId": ".? fun"
-              }, {
-                "title": "Database",
-                "description": "",
-                "rowId": ".? database"
-              }, {
-                "title": "Vote & Absen",
-                "description": "",
-                "rowId": ".? vote"
-              }, {
-                "title": "Al-Qur\'an",
-                "description": "",
-                "rowId": ".? quran"
-              }, {
-                "title": "Pengubah Suara",
-                "description": "",
-                "rowId": ".? audio"
-              }, {
-                "title": "Jadi Bot",
-                "description": "",
-                "rowId": ".? jadibot"
-              }, {
-                "title": "Nsfw",
-                "description": "",
-                "rowId": ".? nsfw"
-              }, { 
-                "title": "Anime",
-                "description": "",
-                "rowId": ".? anime"
-              }, {
-                "title": "Info",
-                "description": "",
-                "rowId": ".? info"
-              }, {
-                "title": "Tanpa Kategori",
-                "description": "",
-                "rowId": ".? tanpakategori"
-              }, {
-                "title": "Owner",
-                "description": "",
-                "rowId": ".? owner"
-              }
-            ]
-          }
-        ], "contextInfo": {
-          "stanzaId": m.key.id,
-          "participant": m.sender,
-          "quotedMessage": m.message
-        }
-      }
-    }, {}), { waitForAck: true })
-    throw 0
-  }
-  //   throw `
-  // ┌〔 DAFTAR MENU 〕
-  // ├ ${_p + command} all
-  // ├ ${_p + command} game
-  // ├ ${_p + command} xp
-  // ├ ${_p + command} stiker
-  // ├ ${_p + command} kerang
-  // ├ ${_p + command} quotes
-  // ├ ${_p + command} admin
-  // ├ ${_p + command} group
-  // ├ ${_p + command} premium
-  // ├ ${_p + command} internet
-  // ├ ${_p + command} anonymous
-  // ├ ${_p + command} nulis
-  // ├ ${_p + command} downloader
-  // ├ ${_p + command} tools
-  // ├ ${_p + command} fun
-  // ├ ${_p + command} database
-  // ├ ${_p + command} vote
-  // ├ ${_p + command} quran
-  // ├ ${_p + command} audio
-  // ├ ${_p + command} jadibot
-  // ├ ${_p + command} NSFW
-  // ├ ${_p + command} ANIME
-  // ├ ${_p + command} info
-  // ├ ${_p + command} tanpa kategori
-  // ├ ${_p + command} owner
-  // └────  
-  //     `.trim()
 
   try {
     let package = JSON.parse(await fs.promises.readFile(path.join(__dirname, '../package.json')).catch(_ => '{}'))
-    let { exp, limit, level, role, registered } = global.db.data.users[m.sender]
+    let { exp, limit, level, role, money, age, pasangan, registered } = global.db.data.users[m.sender]
     let { min, xp, max } = levelling.xpRange(level, global.multiplier)
     let name = registered ? global.db.data.users[m.sender].name : conn.getName(m.sender)
     let d = new Date(new Date + 3600000)
@@ -333,6 +193,174 @@ let handler = async (m, { conn, usedPrefix: _p, args, command }) => {
         enabled: !plugin.disabled,
       }
     })
+    if (teks == '404') {
+      return conn.relayWAMessage(conn.prepareMessageFromContent(m.chat, {
+        "listMessage": {
+          "title": `${ucapan()} kak ${name}\n\n╭━━━━━━━━━━━━━━━━┈\n│       *SHIRAORI BOT*\n└┬────────────┈ ⳹\n┌┤\n││◦➛ *Nama :* *${name}*\n││◦➛ *Uang :* *${money}*\n││◦➛ *Exp :* *${exp}*\n││◦➛ *Limit :* *${limit}*\n││◦➛ *Level :* *${level}*\n││◦➛ *Rank :* *${role}*\n││◦➛ *Umur :* *${age}*\n│└────────────┈ ⳹\n│       *「 TIME 」*\n│◦➛ Hari: *${week}*\n│◦➛ Weton: *${weton}*\n│◦➛ Tanggal: *${date}*\n│◦➛ Waktu: *${time}* WITA\n│◦➛ Islam: *${dateIslamic}*\n│◦➛ Uptime: *${uptime}*\n├──────────────┈ ⳹\n│ Database ${rtotalreg} dari ${totalreg}\n│ Owner: Ilman\n│ Note: Jangan spam bot\n╰━━━━━━━━━━━━━━━━┈ ⳹`,
+          "description": "© SHIRAORI BOT",
+          "buttonText": "Klik Disini",
+          "listType": "SINGLE_SELECT",
+          "sections": [
+            {
+              "rows": [
+                {
+                  "title": `Semua Perintah`,
+                  "description": "",
+                  "rowId": `${_p}? all`
+                }, {
+                  "title": "Pemilik Bot",
+                  "description": "owner bot",
+                  "rowId": `${_p}owner`
+                }, {
+                  "title": "Game",
+                  "description": "",
+                  "rowId": `${_p}? game`
+
+                }, {
+                  "title": "Rpg",
+                  "description": "making process",
+                  "rowId": `${_p}? rpg`
+                  
+                }, {
+                  "title": "Jadian",
+                  "description": "",
+                  "rowId": `${_p}? jadian`
+                }, {
+                  "title": "XP",
+                  "description": "",
+                  "rowId": `${_p}? xp`
+
+                }, {
+                  "title": "Stiker",
+                  "description": "",
+                  "rowId": `${_p}? stiker`
+                }, {
+                  "title": "Kerang Ajaib",
+                  "description": "",
+                  "rowId": `${_p}? kerangajaib`
+                }, {
+                  "title": "Quotes",
+                  "description": "",
+                  "rowId": `${_p}? quotes`
+                }, {
+                  "title": "Admin",
+                  "description": "",
+                  "rowId": `${_p}? admin`
+                }, {
+                  "title": "Grup",
+                  "description": "",
+                  "rowId": `${_p}? grup`
+                }, {
+                  "title": "Premium",
+                  "description": "",
+                  "rowId": `${_p}? premium`
+                }, {
+                  "title": "AdminShiraori",
+                  "description": "fitur khusus admin Shiraori",
+                  "rowId": `${_p}? adminban`
+                }, {
+                  "title": "Internet",
+                  "description": "",
+                  "rowId": `${_p}? internet`
+                }, {
+                  "title": "Anime",
+                  "description": "",
+                  "rowId": `${_p}? anime`
+                }, {
+                  "title": "Nsfw",
+                  "description": "",
+                  "rowId": `${_p}? nsfw`
+                }, {
+                  "title": "Anonymous",
+                  "description": "",
+                  "rowId": `${_p}? anonymous`
+                }, {
+                  "title": "Nulis & Logo",
+                  "description": "",
+                  "rowId": `${_p}? nulis`
+                }, {
+                  "title": "Downloader",
+                  "description": "",
+                  "rowId": `${_p}? downloader`
+                }, {
+                  "title": "Tools",
+                  "description": "",
+                  "rowId": `${_p}? tools`
+                }, {
+                  "title": "Fun",
+                  "description": "",
+                  "rowId": `${_p}? fun`
+                }, {
+                  "title": "Database",
+                  "description": "",
+                  "rowId": `${_p}? database`
+                }, {
+                  "title": "Vote & Absen",
+                  "description": "",
+                  "rowId": `${_p}? vote`
+                }, {
+                  "title": "Al-Qur\'an",
+                  "description": "",
+                  "rowId": `${_p}? quran`
+                }, {
+                  "title": "Pengubah Suara",
+                  "description": "",
+                  "rowId": `${_p}? audio`
+                }, {
+                  "title": "Jadi Bot",
+                  "description": "",
+                  "rowId": `${_p}? jadibot`
+                }, {
+                  "title": "Info",
+                  "description": "",
+                  "rowId": `${_p}? info`
+                }, {
+                  "title": "Tanpa Kategori",
+                  "description": "",
+                  "rowId": `${_p}? tanpakategori`
+                }, {
+                  "title": "Owner",
+                  "description": "",
+                  "rowId": `${_p}? owner`
+                }
+              ]
+            }
+          ], "contextInfo": {
+            "stanzaId": m.key.id,
+            "participant": m.sender,
+            "quotedMessage": m.message
+          }
+        }
+      }, {}), { waitForAck: true })
+    }
+    // gunakan ini jika kamu menggunakan whatsapp bisnis
+    //   throw `
+    // ┌〔 DAFTAR MENU 〕
+    // ├ ${_p + command} all
+    // ├ ${_p + command} game
+    // ├ ${_p + command} xp
+    // ├ ${_p + command} stiker
+    // ├ ${_p + command} kerang
+    // ├ ${_p + command} quotes
+    // ├ ${_p + command} admin
+    // ├ ${_p + command} group
+    // ├ ${_p + command} premium
+    // ├ ${_p + command} internet
+    // ├ ${_p + command} anonymous
+    // ├ ${_p + command} nulis
+    // ├ ${_p + command} downloader
+    // ├ ${_p + command} tools
+    // ├ ${_p + command} fun
+    // ├ ${_p + command} database
+    // ├ ${_p + command} vote
+    // ├ ${_p + command} quran
+    // ├ ${_p + command} audio
+    // ├ ${_p + command} jadibot
+    // ├ ${_p + command} info
+    // ├ ${_p + command} tanpa kategori
+    // ├ ${_p + command} owner
+    // └────  
+    //     `.trim()
     let groups = {}
     for (let tag in tags) {
       groups[tag] = []
@@ -382,15 +410,15 @@ let handler = async (m, { conn, usedPrefix: _p, args, command }) => {
       readmore: readMore
     }
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
-    await conn.send2Button(m.chat, text.trim(), 'RYUNA CHAN BY YUSUP', 'OWNER RYUNA CHAN', '.owner', 'DONASI', '.donasi', { quoted: m })
+    await conn.send2ButtonLoc(m.chat, await (await fetch(fla + teks)).buffer(), text.trim(), `${ucapan()} ${name}\nTime: ${time} WITA\nTanggal: ${week} ${weton} ${date}\nTanggal Islam: ${dateIslamic}\n\n© SHIRAORI BOT`, 'Pemilik Bot', `${_p}owner`, 'Moderator', `${_p}adminshiraori`, m)
   } catch (e) {
     conn.reply(m.chat, 'Maaf, menu sedang error', m)
     throw e
   }
 }
-handler.help = ['menu', 'help', '?']
+handler.help = ['menu', 'help', '?', 'ilman']
 handler.tags = ['main']
-handler.command = /^(menu|help|\?)$/i
+handler.command = /^(menu|ilman|help|\?)$/i
 handler.owner = false
 handler.mods = false
 handler.premium = false
@@ -413,4 +441,21 @@ function clockString(ms) {
   let m = isNaN(ms) ? '--' : Math.floor(ms / 60000) % 60
   let s = isNaN(ms) ? '--' : Math.floor(ms / 1000) % 60
   return [h, m, s].map(v => v.toString().padStart(2, 0)).join(':')
+}
+function ucapan() {
+  const time = moment.tz('Asia/Jakarta').format('HH')
+  res = "Selamat dinihari"
+  if (time >= 4) {
+    res = "Selamat pagi"
+  }
+  if (time > 10) {
+    res = "Selamat siang"
+  }
+  if (time >= 15) {
+    res = "Selamat sore"
+  }
+  if (time >= 18) {
+    res = "Selamat malam"
+  }
+  return res
 }

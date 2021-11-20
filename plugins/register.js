@@ -17,11 +17,13 @@ let handler = async function (m, { text, usedPrefix, command }) {
   let sn = createHash('md5').update(m.sender).digest('hex')
   m.reply(`
 Daftar berhasil!
+
 ┌─〔 Info 〕
 ├ Nama: ${name}
 ├ Umur: ${age} tahun
 ├ SN: ${sn}
 └────
+
 SN digunakan untuk unreg, jadi simpan/bintangi pesan ini
 `.trim())
 }
@@ -31,3 +33,4 @@ handler.tags = ['xp']
 handler.command = /^(daftar|reg(ister)?)$/i
 
 module.exports = handler
+
