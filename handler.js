@@ -467,15 +467,15 @@ ketik *.on delete* untuk mematikan pesan ini
 
 global.dfail = (type, m, conn) => {
   let msg = {
-    rowner: 'Perintah ini hanya dapat digunakan oleh _*Ilman*_',
-    owner: 'Perintah ini hanya dapat digunakan oleh _*Ilman*_',
-    mods: 'Perintah ini hanya dapat digunakan oleh _*Admin Shiraori*_',
+    rowner: 'Perintah ini hanya dapat digunakan oleh _*Yusup*_',
+    owner: 'Perintah ini hanya dapat digunakan oleh _*Yusup*_',
+    mods: 'Perintah ini hanya dapat digunakan oleh _*Ryunaa*_',
     premium: 'Perintah ini hanya untuk pengguna _*Premium*_',
     group: 'Perintah ini hanya dapat digunakan di grup',
     private: 'Perintah ini hanya dapat digunakan di Chat Pribadi',
     admin: 'Perintah ini hanya untuk *Admin* grup',
     botAdmin: 'Jadikan bot sebagai *Admin* untuk menggunakan perintah ini',
-    unreg: 'Silahkan daftar untuk menggunakan fitur ini dengan cara mengetik:\n\n*.daftar nama.umur*\n\nContoh: *.daftar ilman.16*',
+    unreg: 'Silahkan daftar untuk menggunakan fitur ini dengan cara mengetik:\n\n*.daftar nama.umur*\n\nContoh: *.daftar Ysup.16*',
     nsfw: 'NSFW tidak aktif'
   }[type]
   if (msg) return m.reply(msg)
