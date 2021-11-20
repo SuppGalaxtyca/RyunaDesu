@@ -1,16 +1,10 @@
-let handler = async m => m.reply(`
-┌〔 Donasi • Pulsa 〕
-├ Telkomsel [081284160630]
-└────
-
+let fetch = require('node-fetch')
+let handler = async (m, { conn }) => await conn.sendButtonLoc(m.chat, await (await fetch(fla + 'donasi')).buffer(), `
 ┌〔 Donasi • Emoney 〕
-├ OVO, Dana [081284160630]
+├ https://saweria.co/ilmanhdyt
+├ Telkomsel:081351047727
 └────
- saweria.co/manilman
- donasi tuh buat 
-memperpanjang masa *server* *(rdp)*
-sama *api key*
-`.trim())
+`.trim(), '© SHIRAORI', 'Pemilik Bot', '.owner', m)
 handler.help = ['donasi']
 handler.tags = ['info']
 handler.command = /^dona(te|si)$/i

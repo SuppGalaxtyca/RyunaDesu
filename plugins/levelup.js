@@ -1,4 +1,4 @@
-et levelling = require('../lib/levelling')
+let levelling = require('../lib/levelling')
 
 let handler = m => {
   let user = global.db.data.users[m.sender]

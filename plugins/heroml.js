@@ -1,19 +1,28 @@
 let fetch = require('node-fetch')
-let handler = async (m, { conn, text, usedPrefix, command }) => {
-    if (!text) throw `uhm.. cari apa?\n\ncontoh:\n${usedPrefix + command} harith`
-    let res = await fetch(global.API('xteam', '/search/heroml', {
-        q: text
-    }, 'APIKEY'))
-    if (!res.ok) throw await `${res.status} ${res.statusText}`
-    let json = await res.json()
-    if (!json.status) throw json
-    let teks = json.result.map(res => res.subject + '\n' + res.link).join('\n\n')
-    m.reply(teks)
+let handler = async (m, { conn, args }) => {
+   response = args.join(' ')
+  if (!args[0]) throw 'Masukkan Nama Hero Ml'
+  m.reply('*[❗] WAIT, Sedang Proses...*')
+  let res = await fetch(`https://docs-jojo.herokuapp.com/api/heroml?hero=${response}`)
+  let json = await res.json()
+  conn.sendFile(m.chat, json.result.img, 'heroml.jpg', `${response}`, m, false)
 }
-handler.help = ['heroml <pencarian>']
+handler.help = ['heroml'].map(v => v + ' <nama>')
 handler.tags = ['game']
+handler.command = /^(heroml)$/i
+handler.owner = false
+handler.mods = false
+handler.premium = false
+handler.group = false
+handler.private = false
+handler.register = true
 
-handler.command = /^heroml/i
+handler.admin = false
+handler.botAdmin = false
+
+handler.fail = null
+handler.exp = 0
 handler.limit = true
 
 module.exports = handler
+

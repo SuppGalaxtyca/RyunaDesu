@@ -1,11 +1,11 @@
 let handler = async (m, { conn }) => {
-
-  conn.sendFile(m.chat, 'https://api.lolhuman.xyz/api/random/elf?apikey=39f938655e624cb72a79560b', '', 'caption', m)
+  await conn.sendFile(m.chat, global.API('lolhum', '/random/elf', { text: © SHIRAORI }, ,APIKEY'), 'elf.jpg', teks, m)
 }
-handler.help = ['elf]
-handler.tags = ['internet']
-handler.command = /^(elf)$/i
+handler.help = ['elf2']
+handler.tags = ['random']
+handler.command = /^(elf2)$/i
 
 handler.limit = true
+handler.group = true
 
 module.exports = handler
