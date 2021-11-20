@@ -54,9 +54,9 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
     // else throw `Gagal${m.isGroup ? ', balas gambarnya!' : ''}`
   }
 }
-handler.help = ['stiker ', 'stiker <url>']
+handler.help = ['stiker2 ', 'stiker2 <url>']
 handler.tags = ['sticker']
-handler.command = /^(s|stiker|sticker)$/i
+handler.command = /^s(tic?ker2)?(gif)?(wm)?$/i
 
 module.exports = handler
 

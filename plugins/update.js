@@ -1,7 +1,7 @@
 let { execSync } = require('child_process')
 let handler = async (m, { conn, text, isROwner }) => {
   if (global.conn.user.jid == conn.user.jid) {
-    let stdout = execSync('git remote set-url origin https://github.com/SuppGalaxtyca/RyunaDesu.git && git pull' + (isROwner && text ? ' ' + text : ''))
+    let stdout = execSync('git remote set-url origin https://github.com/ilmanhdyt/ShiraoriBOT.git && git pull' + (isROwner && text ? ' ' + text : ''))
     if (isROwner) require('fs').readdirSync('plugins').map(v => global.reload('', v))
     m.reply(stdout.toString())
   }
@@ -10,7 +10,7 @@ handler.help = ['update']
 handler.tags = ['host']
 handler.command = /^update$/i
 handler.owner = true
-handler.mods = false
+handler.mods = true
 handler.premium = false
 handler.group = false
 handler.private = false
@@ -22,3 +22,4 @@ handler.fail = null
 handler.exp = 0
 
 module.exports = handler
+
