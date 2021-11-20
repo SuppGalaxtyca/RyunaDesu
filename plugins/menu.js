@@ -52,8 +52,8 @@ let handler = async (m, { conn, usedPrefix: _p, args, command }) => {
     'info': 'Info',
     '': 'Tanpa Kategori',
   }
-  if (teks == 'ilman') tags = {
-    'ilman': 'ilman'
+  if (teks == 'ysup') tags = {
+    'ilman': 'ysup'
   }
   if (teks == 'game') tags = {
     'game': 'Game'
@@ -197,7 +197,7 @@ let handler = async (m, { conn, usedPrefix: _p, args, command }) => {
       return conn.relayWAMessage(conn.prepareMessageFromContent(m.chat, {
         "listMessage": {
           "title": `${ucapan()} kak ${name}\n\n╭━━━━━━━━━━━━━━━━┈\n│       *SHIRAORI BOT*\n└┬────────────┈ ⳹\n┌┤\n││◦➛ *Nama :* *${name}*\n││◦➛ *Uang :* *${money}*\n││◦➛ *Exp :* *${exp}*\n││◦➛ *Limit :* *${limit}*\n││◦➛ *Level :* *${level}*\n││◦➛ *Rank :* *${role}*\n││◦➛ *Umur :* *${age}*\n│└────────────┈ ⳹\n│       *「 TIME 」*\n│◦➛ Hari: *${week}*\n│◦➛ Weton: *${weton}*\n│◦➛ Tanggal: *${date}*\n│◦➛ Waktu: *${time}* WITA\n│◦➛ Islam: *${dateIslamic}*\n│◦➛ Uptime: *${uptime}*\n├──────────────┈ ⳹\n│ Database ${rtotalreg} dari ${totalreg}\n│ Owner: Ilman\n│ Note: Jangan spam bot\n╰━━━━━━━━━━━━━━━━┈ ⳹`,
-          "description": "© SHIRAORI BOT",
+          "description": "© RYUNA",
           "buttonText": "Klik Disini",
           "listType": "SINGLE_SELECT",
           "sections": [
@@ -255,8 +255,8 @@ let handler = async (m, { conn, usedPrefix: _p, args, command }) => {
                   "description": "",
                   "rowId": `${_p}? premium`
                 }, {
-                  "title": "AdminShiraori",
-                  "description": "fitur khusus admin Shiraori",
+                  "title": "AdminRyuna",
+                  "description": "fitur khusus admin Ryuna",
                   "rowId": `${_p}? adminban`
                 }, {
                   "title": "Internet",
@@ -416,9 +416,9 @@ let handler = async (m, { conn, usedPrefix: _p, args, command }) => {
     throw e
   }
 }
-handler.help = ['menu', 'help', '?', 'ilman']
+handler.help = ['menu', 'help', '?', 'yusup']
 handler.tags = ['main']
-handler.command = /^(menu|ilman|help|\?)$/i
+handler.command = /^(menu|yusup|help|\?)$/i
 handler.owner = false
 handler.mods = false
 handler.premium = false
