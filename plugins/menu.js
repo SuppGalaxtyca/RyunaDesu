@@ -23,7 +23,7 @@ let handler = async (m, { conn, usedPrefix: _p, args, command }) => {
   if (!arrayMenu.includes(teks)) teks = '404'
   if (teks == 'all') tags = {
     'main': 'Utama',
-    'ilman': 'ilman',
+    'yusup': 'yusup',
     'game': 'Game',
     'rpg': `Rpg ${global.opts['restrict'] ? '' : '(perbaikan)'}`,
     'jadian': 'Jadian',
@@ -53,7 +53,7 @@ let handler = async (m, { conn, usedPrefix: _p, args, command }) => {
     '': 'Tanpa Kategori',
   }
   if (teks == 'ysup') tags = {
-    'ilman': 'ysup'
+    'ysup': 'ysup'
   }
   if (teks == 'game') tags = {
     'game': 'Game'
@@ -196,7 +196,7 @@ let handler = async (m, { conn, usedPrefix: _p, args, command }) => {
     if (teks == '404') {
       return conn.relayWAMessage(conn.prepareMessageFromContent(m.chat, {
         "listMessage": {
-          "title": `${ucapan()} kak ${name}\n\n╭━━━━━━━━━━━━━━━━┈\n│       *SHIRAORI BOT*\n└┬────────────┈ ⳹\n┌┤\n││◦➛ *Nama :* *${name}*\n││◦➛ *Uang :* *${money}*\n││◦➛ *Exp :* *${exp}*\n││◦➛ *Limit :* *${limit}*\n││◦➛ *Level :* *${level}*\n││◦➛ *Rank :* *${role}*\n││◦➛ *Umur :* *${age}*\n│└────────────┈ ⳹\n│       *「 TIME 」*\n│◦➛ Hari: *${week}*\n│◦➛ Weton: *${weton}*\n│◦➛ Tanggal: *${date}*\n│◦➛ Waktu: *${time}* WITA\n│◦➛ Islam: *${dateIslamic}*\n│◦➛ Uptime: *${uptime}*\n├──────────────┈ ⳹\n│ Database ${rtotalreg} dari ${totalreg}\n│ Owner: Ilman\n│ Note: Jangan spam bot\n╰━━━━━━━━━━━━━━━━┈ ⳹`,
+          "title": `${ucapan()} kak ${name}\n\n╭━━━━━━━━━━━━━━━━┈\n│       *RYUNA CHAN*\n└┬────────────┈ ⳹\n┌┤\n││◦➛ *Nama :* *${name}*\n││◦➛ *Uang :* *${money}*\n││◦➛ *Exp :* *${exp}*\n││◦➛ *Limit :* *${limit}*\n││◦➛ *Level :* *${level}*\n││◦➛ *Rank :* *${role}*\n││◦➛ *Umur :* *${age}*\n│└────────────┈ ⳹\n│       *「 TIME 」*\n│◦➛ Hari: *${week}*\n│◦➛ Weton: *${weton}*\n│◦➛ Tanggal: *${date}*\n│◦➛ Waktu: *${time}* WIB\n│◦➛ Islam: *${dateIslamic}*\n│◦➛ Uptime: *${uptime}*\n├──────────────┈ ⳹\n│ Database ${rtotalreg} dari ${totalreg}\n│ Owner: Spgltx\n│ Note: Jangan spam bot\n╰━━━━━━━━━━━━━━━━┈ ⳹`,
           "description": "© RYUNA",
           "buttonText": "Klik Disini",
           "listType": "SINGLE_SELECT",
@@ -410,7 +410,7 @@ let handler = async (m, { conn, usedPrefix: _p, args, command }) => {
       readmore: readMore
     }
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
-    await conn.send2ButtonLoc(m.chat, await (await fetch(fla + teks)).buffer(), text.trim(), `${ucapan()} ${name}\nTime: ${time} WITA\nTanggal: ${week} ${weton} ${date}\nTanggal Islam: ${dateIslamic}\n\n© SHIRAORI BOT`, 'Pemilik Bot', `${_p}owner`, 'Moderator', `${_p}adminshiraori`, m)
+    await conn.send2ButtonLoc(m.chat, await (await fetch(fla + teks)).buffer(), text.trim(), `${ucapan()} ${name}\nTime: ${time} WIB\nTanggal: ${week} ${weton} ${date}\nTanggal Islam: ${dateIslamic}\n\n© SHIRAORI BOT`, 'Pemilik Bot', `${_p}owner`, 'Moderator', `${_p}adminshiraori`, m)
   } catch (e) {
     conn.reply(m.chat, 'Maaf, menu sedang error', m)
     throw e
